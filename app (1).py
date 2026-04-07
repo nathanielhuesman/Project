@@ -337,7 +337,7 @@ if "df" in st.session_state:
     st.subheader("📬 Alert Log")
     log_df = load_alerts_log()
     if not log_df.empty:
-    st.dataframe(log_df[::-1], use_container_width=True, hide_index=True)
+        st.dataframe(log_df[::-1], use_container_width=True, hide_index=True)
 
     # ── Email Test ──
 st.divider()

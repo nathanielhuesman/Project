@@ -337,6 +337,28 @@ if "df" in st.session_state:
     st.subheader("📬 Alert Log")
     log_df = load_alerts_log()
     if not log_df.empty:
-        st.dataframe(log_df[::-1], use_container_width=True, hide_index=True)
+    st.dataframe(log_df[::-1], use_container_width=True, hide_index=True)
+
+    # ── Email Test ──
+st.divider()
+st.subheader("🧪 Test Email Alert")
+test_email = st.text_input("Send test email to:", placeholder="you@gmail.com")
+test_col1, test_col2 = st.columns(2)
+with test_col1:
+    if st.button("Send Test Golden Cross Email"):
+        if test_email and "@" in test_email:
+            success = send_email(test_email, "TEST", "Golden Cross 🟡", datetime.now().date(), 150.00)
+            if success:
+                st.success("✅ Test golden cross email sent! Check your inbox.")
+        else:
+            st.error("Enter a valid email first.")
+with test_col2:
+    if st.button("Send Test Death Cross Email"):
+        if test_email and "@" in test_email:
+            success = send_email(test_email, "TEST", "Death Cross 💀", datetime.now().date(), 150.00)
+            if success:
+                st.success("✅ Test death cross email sent! Check your inbox.")
+        else:
+            st.error("Enter a valid email first.")
     else:
         st.caption("No alerts sent yet.")
